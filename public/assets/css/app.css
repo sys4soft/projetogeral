@@ -1,0 +1,11 @@
+/* *{
+	-webkit-box-shadow: inset 0px 0px 0px 1px rgba(200,200,200,0.3);
+    -moz-box-shadow: inset 0px 0px 0px 1px rgba(200,200,200,0.3);
+    box-shadow: inset 0px 0px 0px 1px rgba(200,200,200,0.3);
+} */
+
+/* buttons */
+.btn-100 {width: 100px; }
+.btn-150 {width: 150px; }
+.btn-200 {width: 200px; }
+.btn-250 {width: 250px; }
