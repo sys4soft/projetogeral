@@ -32,9 +32,12 @@
 					<td><?php echo $familia['designacao']?></td>
 					<td><?php echo $familia['parent'] != ''? $familia['parent'] : '-' ?></td>
 					<td class="text-right">
-						<a href="<?php echo site_url('stocks/familia_editar/'.$familia['id_familia'])?>">Editar</a>
-						<span class="ml-2 mr-2">|</span>
-						<a href="<?php echo site_url('stocks/familia_eliminar/'.$familia['id_familia'])?>">Eliminar</a>
+						<a href="<?php echo site_url('stocks/familia_editar/'.$familia['id_familia'])?>" class="btn btn-primary btn-sm btn-100">
+							<i class="fa fa-pencil mr-2"></i>Editar
+						</a>											
+						<a href="<?php echo site_url('stocks/familia_eliminar/'.$familia['id_familia'])?>" class="btn btn-danger btn-sm btn-100">
+							<i class="fa fa-trash mr-2"></i>Eliminar
+						</a>
 					</td>
 				</tr>
 			<?php endforeach;?>
