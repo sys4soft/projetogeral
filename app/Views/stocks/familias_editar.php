@@ -42,7 +42,9 @@
                                 $familia_parent = 'selected';
                             }
                         ?>
-                        <option value="<?php echo $fTemp['id_familia']?>" <?php echo $familia_parent ?>><?php echo $fTemp['designacao']?></option>
+                        <?php if($familia['id_familia'] != $fTemp['id_familia']): ?>
+                            <option value="<?php echo $fTemp['id_familia']?>" <?php echo $familia_parent ?>><?php echo $fTemp['designacao']?></option>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </select>
             </div>            

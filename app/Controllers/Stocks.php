@@ -81,17 +81,18 @@ class Stocks extends BaseController{
             $request = \Config\Services::request();            
             
             // verificar se já existe a família com mesmo nome
-            // $resultado = $model->check_family($request->getPost('text_designacao'));
-            // if($resultado){
-            //     $error = 'Já existe uma família com a mesma designação';
-            // }
+            $resultado = $model->check_other_family($request->getPost('text_designacao'), $id_familia);
+            if($resultado){
+                $error = 'Já existe outra família com a mesma designação';
+            }
             
             // atualizar os dados da família na base de dados
             if($error == ''){
-                $model->family_add();
+                $model->family_edit($id_familia);
                 $data['success'] = "Família atualizada com sucesso.";
                 
                 // redirecionamento para stocks/familias
+                return redirect()->to(site_url('stocks/familias'));
 
             } else {
                 $data['error'] = $error;

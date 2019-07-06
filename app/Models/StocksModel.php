@@ -67,4 +67,39 @@ class StocksModel extends Model{
         $this->query("INSERT INTO stock_familias VALUES(0, ?, ?, '')", $params);
     }
 
+    // ===========================================
+    public function check_other_family($designacao, $id_family){
+
+        $params = array(
+            $designacao,
+            $id_family
+        );
+
+        $results = $this->query("SELECT * FROM stock_familias WHERE designacao = ? AND id_familia != ?", $params)->getResult('array');
+        if(count($results) != 0){
+            return true;
+        } else {
+            return false;
+        }        
+    }
+
+    // ===========================================
+    public function family_edit($id_family){
+
+        // editar os dados da família
+        $request = \Config\Services::request();
+        $params = array(
+            $request->getPost('select_parent'),
+            $request->getPost('text_designacao'),
+            $id_family
+        );
+
+        $this->query(
+            "UPDATE stock_familias ".
+            "SET id_parent = ?, ".
+            "designacao = ? ".
+            "WHERE id_familia = ?",
+            $params);
+    }
+
 }
