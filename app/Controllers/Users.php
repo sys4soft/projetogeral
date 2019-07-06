@@ -6,6 +6,7 @@ use App\Models\UsersModel;
 class Users extends BaseController
 {
 	protected $session;
+	
 
 	// =====================================================
 	public function __construct(){
