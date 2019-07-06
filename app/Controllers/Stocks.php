@@ -104,8 +104,21 @@ class Stocks extends BaseController{
     }
 
     // ==================================================
-    public function familia_eliminar($id_familia){
-        echo 'formulário para editar família';
+    public function familia_eliminar($id_familia, $resposta = 'nao'){
+        
+        $model = new StocksModel();
+        $data['familia'] = $model->get_family($id_familia);
+
+        if($resposta == 'sim'){
+            
+            // eliminação da família
+            $model->delete_family($id_familia);
+
+            // redirecionamento para stocks/familias
+            return redirect()->to(site_url('stocks/familias'));
+        }
+
+        echo view('stocks/familias_eliminar', $data);
     }
 
 

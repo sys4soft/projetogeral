@@ -102,4 +102,19 @@ class StocksModel extends Model{
             $params);
     }
 
+    // ===========================================
+    public function delete_family($id_family){
+
+        // eliminar a família e alterar o id dos parents
+        $params = array(
+            $id_family
+        );
+
+        // delete the selected family
+        $this->query("DELETE FROM stock_familias WHERE id_familia = ?", $params);
+
+        // updates all the families where id_parent is id_family
+        $this->query("UPDATE stock_familias SET id_parent = 0 WHERE id_parent = ?", $params);
+    }
+
 }
