@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ProjetoGeral - Users</title>
 
+    <script src="<?php echo base_url('assets/js/jquery-3.4.0.min.js') ?>"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/font-awesome.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/app.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/datatables.min.css') ?>">
 
 </head>
 <body>
@@ -49,10 +52,10 @@
 
 </div>
    
-    <!-- javascript -->
-    <script src="<?php echo base_url('assets/js/jquery-3.4.0.min.js') ?>"></script>
+    <!-- javascript -->    
     <script src="<?php echo base_url('assets/js/popper.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/datatables.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/app.js') ?>"></script>
 </body>
 </html>
