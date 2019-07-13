@@ -17,7 +17,7 @@
 		<thead class="thead-dark">
 			<th>ID</th>
 			<th>Taxa</th>
-			<th>Percentual</th>
+			<th class="text-center">Percentual</th>
 			<th class="text-right">Ações</th>			
 		</thead>
 		<tbody>
@@ -25,12 +25,12 @@
 				<tr>
 					<td><?php echo $taxa['id_taxa']?></td>
 					<td><?php echo $taxa['designacao']?></td>
-					<td><?php echo $taxa['percentagem'] ?></td>
+					<td class="text-center"><?php echo $taxa['percentagem'] ?> %</td>
 					<td class="text-right">
-						<a href="<?php echo site_url('stocks/taxa_editar/'.$taxa['id_taxa'])?>" class="btn btn-primary btn-sm btn-100">
+						<a href="<?php echo site_url('stocks/taxas_editar/'.$taxa['id_taxa'])?>" class="btn btn-primary btn-sm btn-100">
 							<i class="fa fa-pencil mr-2"></i>Editar
 						</a>											
-						<a href="<?php echo site_url('stocks/taxa_eliminar/'.$taxa['id_taxa'])?>" class="btn btn-danger btn-sm btn-100">
+						<a href="<?php echo site_url('stocks/taxas_eliminar/'.$taxa['id_taxa'])?>" class="btn btn-danger btn-sm btn-100">
 							<i class="fa fa-trash mr-2"></i>Eliminar
 						</a>
 					</td>
