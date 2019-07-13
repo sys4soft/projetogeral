@@ -174,15 +174,11 @@ class Stocks extends BaseController{
 
         $model = new StocksModel();
         $data = array();
+        $error = '';
 
         // adicionar nova taxa
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){            
 
-            echo '<pre>';
-            print_r($_POST);
-            echo '</pre>';
-            die();
-            
             // vamos buscar os dados submetidos pelo formulário
             $request = \Config\Services::request();            
             

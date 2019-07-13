@@ -23,9 +23,9 @@
 		<tbody>
 			<?php foreach($taxas as $taxa):?>
 				<tr>
-					<td><?php echo $familia['id_taxa']?></td>
-					<td><?php echo $familia['designacao']?></td>
-					<td><?php echo $familia['percentagem'] ?></td>
+					<td><?php echo $taxa['id_taxa']?></td>
+					<td><?php echo $taxa['designacao']?></td>
+					<td><?php echo $taxa['percentagem'] ?></td>
 					<td class="text-right">
 						<a href="<?php echo site_url('stocks/taxa_editar/'.$taxa['id_taxa'])?>" class="btn btn-primary btn-sm btn-100">
 							<i class="fa fa-pencil mr-2"></i>Editar

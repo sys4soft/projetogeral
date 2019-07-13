@@ -132,4 +132,34 @@ class StocksModel extends Model{
         return $this->query("SELECT * FROM stock_taxas")->getResult('array');
     }
 
+    // ===========================================
+    public function check_tax($designacao){
+
+        // check if there is a taxe with the same name
+        $params = array(
+            $designacao
+        );
+
+        $results = $this->query("SELECT * FROM stock_taxas WHERE designacao = ?", $params)->getResult('array');
+        if(count($results) != 0){
+            return true;
+        } else {
+            return false;
+        }        
+    }
+
+    // ===========================================
+    public function tax_add(){
+
+        // adicionar uma nova taxa à base de dados
+        $request = \Config\Services::request();
+        $params = array(
+            $request->getPost('text_designacao'),
+            $request->getPost('text_valor')
+        );
+
+        $this->query("INSERT INTO stock_taxas VALUES(0, ?, ?)", $params);
+    }
+
+
 }

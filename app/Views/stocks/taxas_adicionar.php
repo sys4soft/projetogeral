@@ -34,15 +34,15 @@
                 <input type="number"
                        class="form-control" 
                        name="text_valor" 
-                       step="0.5"
+                       step="0.01"
                        min="0"
                        max="100"
-                       value="10"
+                       placeholder="0.00"
                        required>
             </div>
 
             <div class="form-group">
-                <a href="<?php echo site_url('stocks/familias')?>" class="btn btn-secondary btn-150">Cancelar</a>
+                <a href="<?php echo site_url('stocks/taxas')?>" class="btn btn-secondary btn-150">Cancelar</a>
                 <button class="btn btn-primary btn-150">Guardar</button>
             </div>
 
