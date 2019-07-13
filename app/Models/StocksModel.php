@@ -7,6 +7,8 @@ class StocksModel extends Model{
     protected $db;
 
     // ===========================================
+    // familias
+    // ===========================================
     public function __construct(){
         $this->db = db_connect();
     }
@@ -115,6 +117,19 @@ class StocksModel extends Model{
 
         // updates all the families where id_parent is id_family
         $this->query("UPDATE stock_familias SET id_parent = 0 WHERE id_parent = ?", $params);
+    }
+
+
+
+
+
+    // ===========================================
+    // taxas
+    // ===========================================
+    public function get_all_taxes(){
+
+        // returns all taxes
+        return $this->query("SELECT * FROM stock_taxas")->getResult('array');
     }
 
 }

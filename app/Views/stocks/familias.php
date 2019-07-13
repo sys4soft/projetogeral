@@ -51,7 +51,7 @@
 <script>
 $(document).ready( function () {
     $('#tabela_familias').DataTable();
-} );
+});
 </script>
 
 <?php $this->endSection() ?>

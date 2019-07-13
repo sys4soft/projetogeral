@@ -161,7 +161,12 @@ class Stocks extends BaseController{
 
     // ==================================================
     public function taxas(){
-        echo view('stocks/taxas');
+
+        // carregar os dados das taxas para passar para a view
+        $model = new StocksModel();
+        $data['taxas'] = $model->get_all_taxes();
+
+        echo view('stocks/taxas', $data);
     }
 
 
