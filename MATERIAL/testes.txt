@@ -1,0 +1,4 @@
+TESTES DE EDIÇÃO
+1. editar e atualizar sem alterar dados
+2. editar e tentar alterar designacao para designacao existente
+3. editar e tentar alterar designacao para nova designacao

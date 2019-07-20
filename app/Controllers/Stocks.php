@@ -207,7 +207,8 @@ class Stocks extends BaseController{
 
         // carregar os dados das taxas para passar para a view
         $model = new StocksModel();
-        $data['familia'] = $model->get_tax($id_taxa);
+        $data['taxa'] = $model->get_tax($id_taxa);
+
         $error = '';
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -224,7 +225,6 @@ class Stocks extends BaseController{
             // atualizar os dados da taxa na base de dados
             if($error == ''){
                 $model->tax_edit($id_taxa);
-                $data['success'] = "Taxa atualizada com sucesso.";
                 
                 // redirecionamento para stocks/taxas
                 return redirect()->to(site_url('stocks/taxas'));
@@ -235,9 +235,5 @@ class Stocks extends BaseController{
         }
 
         echo view('stocks/taxas_editar', $data);
-
     }
-    
-
-
 }

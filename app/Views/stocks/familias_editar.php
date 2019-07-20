@@ -56,7 +56,7 @@
 
             <div class="form-group">
                 <a href="<?php echo site_url('stocks/familias')?>" class="btn btn-secondary btn-150">Cancelar</a>
-                <button class="btn btn-primary btn-150">Guardar</button>
+                <button class="btn btn-primary btn-150">Atualizar</button>
             </div>
 
         </form>
