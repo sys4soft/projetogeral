@@ -236,4 +236,22 @@ class Stocks extends BaseController{
 
         echo view('stocks/taxas_editar', $data);
     }
+
+    // ==================================================
+    public function taxas_eliminar($id_taxa, $resposta = 'nao'){
+        
+        $model = new StocksModel();
+        $data['taxa'] = $model->get_tax($id_taxa);
+
+        if($resposta == 'sim'){
+            
+            // eliminação da taxa
+            $model->delete_tax($id_taxa);
+
+            // redirecionamento para stocks/taxas
+            return redirect()->to(site_url('stocks/taxas'));
+        }
+
+        echo view('stocks/taxas_eliminar', $data);
+    }
 }

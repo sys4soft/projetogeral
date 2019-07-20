@@ -205,4 +205,19 @@ class StocksModel extends Model{
             "WHERE id_taxa = ?",
             $params);
     }
+
+    // ===========================================
+    public function delete_tax($id_taxa){
+
+        // eliminar a taxa e alterar o id nos produtos
+        $params = array(
+            $id_taxa
+        );
+
+        // delete the selected tax
+        $this->query("DELETE FROM stock_taxas WHERE id_taxa = ?", $params);
+
+        // updates all the products where id_taxa is id_taxa
+        $this->query("UPDATE stock_produtos SET id_taxa = 0 WHERE id_taxa = ?", $params);
+    }
 }
