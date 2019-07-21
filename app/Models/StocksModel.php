@@ -220,4 +220,24 @@ class StocksModel extends Model{
         // updates all the products where id_taxa is id_taxa
         $this->query("UPDATE stock_produtos SET id_taxa = 0 WHERE id_taxa = ?", $params);
     }
+
+
+
+
+    // ===========================================
+    // produtos
+    // ===========================================
+    public function get_all_products(){
+
+        // returns all products
+        return $this->query(
+            "SELECT " .
+                "p.id_produto, p.designacao AS nome_produto, p.preco, p.quantidade, " .
+                "f.designacao AS familia, " .
+                "t.designacao AS taxa, t.percentagem " .
+            "FROM stock_produtos p ".
+            "LEFT JOIN stock_familias f ON p.id_familia = f.id_familia " .
+            "LEFT JOIN stock_taxas t ON p.id_taxa = t.id_taxa"
+        )->getResult('array');
+    }
 }
