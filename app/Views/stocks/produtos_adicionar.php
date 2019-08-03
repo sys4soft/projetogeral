@@ -56,11 +56,39 @@
                 <textarea name="text_descricao" class="form-control" placeholder="Descrição"></textarea>
             </div>
 
-            <!-- preco -->
+            <!-- imagem -->
             <div class="form-group">
-                <input type="text" name="text_preco" class="form-control" placeholder="Preço por unidade">
+                <label>Imagem do produto:</label>
+                <input type="file" name="" id="" class="form-control">
             </div>
 
+            <!-- preco -->
+            <div class="form-inline mb-4">
+                <label>Preço/Unidade (€):</label>
+                <input type="number" name="text_preco" min="0" max="100000" step="0.05" class="form-control">
+            </div>
+
+            <!-- taxa -->
+            <div class="form-group">
+                <label>Taxa / imposto:</label>
+                <select name="combo_taxa" class="form-control">
+                    <option value="0">Nenhuma (0 %)</option>
+                    <?php foreach ($taxas as $taxa): ?>
+                        <option value="<?php echo $taxa['id_taxa']?>"><?php echo $taxa['designacao'] . ' (' . $taxa['percentagem'] . ' %)' ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <!-- quantidade -->
+            <div class="form-inline mb-4">
+                <label>Quantidade:</label>
+                <input type="number" name="text_quantidade" min="0" max="100000" class="form-control">
+            </div>
+
+            <!-- detalhes -->
+            <div class="form-group">
+                <textarea name="text_detalhes" class="form-control" placeholder="Detalhes"></textarea>
+            </div>
             
 
             <div class="form-group">
