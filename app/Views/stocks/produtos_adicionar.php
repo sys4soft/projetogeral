@@ -5,12 +5,12 @@
 
 
 <?php 
-echo 'resultados:';
-echo '<pre>';
-print_r($familias);
-echo '<hr>';
-print_r($taxas);
-echo '</pre>';
+// echo 'resultados:';
+// echo '<pre>';
+// print_r($familias);
+// echo '<hr>';
+// print_r($taxas);
+// echo '</pre>';
 ?>
 
 
@@ -34,6 +34,32 @@ echo '</pre>';
                     <?php echo $success ?>
                 </div>
             <?php endif; ?>
+
+            <!-- familia -->
+            <div class="form-group">
+                <label>Família do produto:</label>
+                <select name="combo_familia" class="form-control">
+                    <option value="0">Nenhuma</option>
+                    <?php foreach ($familias as $familia): ?>
+                        <option value="<?php echo $familia['id_familia']?>"><?php echo $familia['designacao'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <!-- designacao -->
+            <div class="form-group">
+                <input type="text" type="text_designacao" class="form-control" placeholder="Designação do produto">
+            </div>
+
+            <!-- descricao -->
+            <div class="form-group">
+                <textarea name="text_descricao" class="form-control" placeholder="Descrição"></textarea>
+            </div>
+
+            <!-- preco -->
+            <div class="form-group">
+                <input type="text" name="text_preco" class="form-control" placeholder="Preço por unidade">
+            </div>
 
             
 
