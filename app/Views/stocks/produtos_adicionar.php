@@ -1,16 +1,27 @@
 <?php 
-	$this->extend('layouts/layout_stocks');
+    $this->extend('layouts/layout_stocks');    
 ?>
 <?php $this->section('conteudo') ?>
 
+
+<?php 
+echo 'resultados:';
+echo '<pre>';
+print_r($familias);
+echo '<hr>';
+print_r($taxas);
+echo '</pre>';
+?>
+
+
 <div class="row mt-2">
 	<div class="col-12">
-		<h4>Famílias > Adicionar</h4>
+		<h4>Produtos > Adicionar</h4>
         <hr>        
     </div>
 
     <div class="col-12 mt-3">
-        <form action="<?php echo site_url('stocks/familia_adicionar')?>" method="post">
+        <form action="<?php echo site_url('stocks/produtos_adicionar')?>" method="post">
 
             <?php if(isset($error)): ?>
                 <div class="alert alert-danger p-3 text-center">
@@ -27,7 +38,7 @@
             
 
             <div class="form-group">
-                <a href="<?php echo site_url('stocks/familias')?>" class="btn btn-secondary btn-150">Cancelar</a>
+                <a href="<?php echo site_url('stocks/produtos')?>" class="btn btn-secondary btn-150">Cancelar</a>
                 <button class="btn btn-primary btn-150">Guardar</button>
             </div>
 

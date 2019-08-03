@@ -127,6 +127,8 @@ class Stocks extends BaseController{
 
 
     // ==================================================
+    // MOVIMENTOS
+    // ==================================================
     public function movimentos(){
         echo view('stocks/movimentos');
     }
@@ -139,20 +141,36 @@ class Stocks extends BaseController{
 
 
 
-
+    // ==================================================
+    // PRODUTOS
     // ==================================================
     public function produtos(){
 
         // carregar os produtos existentes
         $model = new StocksModel();
         $data['produtos'] = $model->get_all_products();
-
-        echo '<pre>';
-        print_r($data['produtos']);
-        echo '</pre>';
-        die();
-
         echo view('stocks/produtos', $data);
+    }
+
+    // ==================================================
+    public function produtos_adicionar(){
+
+        $model = new StocksModel();
+        
+        // carregar familias    
+        $data['familias'] = $model->get_all_families();
+
+        // carregar as taxas
+        $data['taxas'] = $model->get_all_taxes();
+
+        // tratar a submissao do formulario
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            die('formulário submetido.');
+        }
+
+        // apresentar o formulário
+        echo view('stocks/produtos_adicionar', $data);
+        
     }
 
 
@@ -164,6 +182,8 @@ class Stocks extends BaseController{
 
 
 
+    // ==================================================
+    // TAXAS
     // ==================================================
     public function taxas(){
 
