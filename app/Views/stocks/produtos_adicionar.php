@@ -48,7 +48,7 @@
 
             <!-- designacao -->
             <div class="form-group">
-                <input type="text" name="text_designacao" class="form-control" placeholder="Designação do produto">
+                <input type="text" name="text_designacao" class="form-control" placeholder="Designação do produto" required>
             </div>
 
             <!-- descricao -->
@@ -59,13 +59,13 @@
             <!-- imagem -->
             <div class="form-group card bg-light p-4">
                 <label>Imagem do produto:</label>
-                <input type="file" name="file_imagem" accept=".jpg, .png" class="form-control">
+                <input type="file" name="file_imagem" accept=".jpg, .png" class="form-control" required>
             </div>
 
             <!-- preco -->   
             <div class="row form-group align-items-center">
                 <div class="col-2"><label>Preço/Unidade (€):</label></div>
-                <div class="col-3"><input type="number" name="text_preco" min="0" max="100000" step="0.05" class="form-control"></div>
+                <div class="col-3"><input type="number" name="text_preco" min="0" max="100000" step="0.05" class="form-control" required></div>
             </div>
             
             <!-- taxa -->
@@ -84,7 +84,7 @@
             <!-- quantidade -->
             <div class="row form-group align-items-center">
                 <div class="col-2"><label>Quantidade:</label></div>
-                <div class="col-3"><input type="number" name="text_quantidade" min="0" max="100000" class="form-control"></div>
+                <div class="col-3"><input type="number" name="text_quantidade" min="0" max="100000" class="form-control" value="0" required></div>
             </div>
 
 

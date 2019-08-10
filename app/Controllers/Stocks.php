@@ -166,27 +166,19 @@ class Stocks extends BaseController{
         // tratar a submissao do formulario
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+            echo '<pre>';
+            print_r($_POST);
+            print_r($_FILES);
+            echo '</pre>';
+
+            die();
+
             // upload da imagem
             $novo_ficheiro = round(microtime(true) * 1000) . '.'.pathinfo($_FILES["file_imagem"]["name"], PATHINFO_EXTENSION);
-
             $target_file = '';
-            $target_file .= base_url('assets/product_images/');
+            $target_file .= 'assets/product_images/';
             $target_file .= $novo_ficheiro;
-            
-            $sucesso = '';
-            $erro = '';
-
-            if (move_uploaded_file($_FILES["file_imagem"]["tmp_name"], $target_file)){
-                $sucesso = "Ficheiro carregado com sucesso.";
-            } else {
-                $erro = "Aconteceu um erro no carregamento do ficheiro.";
-            }
-
-            echo $sucesso;
-            echo $erro;
-            
-
-            die('formulário submetido.');
+            $file_success = move_uploaded_file($_FILES["file_imagem"]["tmp_name"], $target_file);
         }
 
         // apresentar o formulário
