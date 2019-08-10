@@ -57,33 +57,36 @@
             </div>
 
             <!-- imagem -->
-            <div class="form-group">
+            <div class="form-group card bg-light p-4">
                 <label>Imagem do produto:</label>
                 <input type="file" name="" id="" class="form-control">
             </div>
 
-            <!-- preco -->
-            <div class="form-inline mb-4">
-                <label>Preço/Unidade (€):</label>
-                <input type="number" name="text_preco" min="0" max="100000" step="0.05" class="form-control">
+            <!-- preco -->   
+            <div class="row form-group align-items-center">
+                <div class="col-2"><label>Preço/Unidade (€):</label></div>
+                <div class="col-3"><input type="number" name="text_preco" min="0" max="100000" step="0.05" class="form-control"></div>
             </div>
-
+            
             <!-- taxa -->
-            <div class="form-group">
-                <label>Taxa / imposto:</label>
-                <select name="combo_taxa" class="form-control">
-                    <option value="0">Nenhuma (0 %)</option>
-                    <?php foreach ($taxas as $taxa): ?>
-                        <option value="<?php echo $taxa['id_taxa']?>"><?php echo $taxa['designacao'] . ' (' . $taxa['percentagem'] . ' %)' ?></option>
-                    <?php endforeach; ?>
-                </select>
+            <div class="row form-group align-items-center">
+                <div class="col-2"><label>Taxa / imposto:</label></div>
+                <div class="col-3">
+                    <select name="combo_taxa" class="form-control">
+                        <option value="0">Nenhuma (0 %)</option>
+                        <?php foreach ($taxas as $taxa): ?>
+                            <option value="<?php echo $taxa['id_taxa']?>"><?php echo $taxa['designacao'] . ' (' . $taxa['percentagem'] . ' %)' ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
 
             <!-- quantidade -->
-            <div class="form-inline mb-4">
-                <label>Quantidade:</label>
-                <input type="number" name="text_quantidade" min="0" max="100000" class="form-control">
+            <div class="row form-group align-items-center">
+                <div class="col-2"><label>Quantidade:</label></div>
+                <div class="col-3"><input type="number" name="text_quantidade" min="0" max="100000" class="form-control"></div>
             </div>
+
 
             <!-- detalhes -->
             <div class="form-group">
@@ -91,7 +94,7 @@
             </div>
             
 
-            <div class="form-group">
+            <div class="form-group text-center">
                 <a href="<?php echo site_url('stocks/produtos')?>" class="btn btn-secondary btn-150">Cancelar</a>
                 <button class="btn btn-primary btn-150">Guardar</button>
             </div>
