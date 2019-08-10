@@ -21,7 +21,7 @@
     </div>
 
     <div class="col-12 mt-3">
-        <form action="<?php echo site_url('stocks/produtos_adicionar')?>" method="post">
+        <form action="<?php echo site_url('stocks/produtos_adicionar')?>" method="post" enctype="multipart/form-data">
 
             <?php if(isset($error)): ?>
                 <div class="alert alert-danger p-3 text-center">
@@ -48,7 +48,7 @@
 
             <!-- designacao -->
             <div class="form-group">
-                <input type="text" type="text_designacao" class="form-control" placeholder="Designação do produto">
+                <input type="text" name="text_designacao" class="form-control" placeholder="Designação do produto">
             </div>
 
             <!-- descricao -->
@@ -59,7 +59,7 @@
             <!-- imagem -->
             <div class="form-group card bg-light p-4">
                 <label>Imagem do produto:</label>
-                <input type="file" name="" id="" class="form-control">
+                <input type="file" name="file_imagem" accept=".jpg, .png" class="form-control">
             </div>
 
             <!-- preco -->   

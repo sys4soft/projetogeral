@@ -165,6 +165,20 @@ class Stocks extends BaseController{
 
         // tratar a submissao do formulario
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            // upload da imagem
+            $target_file = base_url('assets/product_images/') . basename($_FILES["file_imagem"]["name"]);
+
+            echo $target_file . '<br>';
+            echo time() . '<br>';
+            echo round(microtime(true) * 1000);
+
+
+            echo '<pre>';
+            print_r($_POST);
+            print_r($_FILES);
+            echo '</pre>';
+
             die('formulário submetido.');
         }
 
