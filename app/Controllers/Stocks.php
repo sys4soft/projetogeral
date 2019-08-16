@@ -166,15 +166,13 @@ class Stocks extends BaseController{
         // tratar a submissao do formulario
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-            echo '<pre>';
-            print_r($_POST);
-            print_r($_FILES);
-            echo '</pre>';
-
-            die();
-
-            // upload da imagem
+            // definição do nome da imagem do produto
             $novo_ficheiro = round(microtime(true) * 1000) . '.'.pathinfo($_FILES["file_imagem"]["name"], PATHINFO_EXTENSION);
+
+            $model = new StocksModel();
+            $model->product_add($novo_ficheiro);
+
+            // upload da imagem            
             $target_file = '';
             $target_file .= 'assets/product_images/';
             $target_file .= $novo_ficheiro;

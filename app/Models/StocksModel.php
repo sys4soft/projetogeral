@@ -240,4 +240,30 @@ class StocksModel extends Model{
             "LEFT JOIN stock_taxas t ON p.id_taxa = t.id_taxa"
         )->getResult('array');
     }
+
+    // ===========================================
+    public function product_add($nome_ficheiro){
+
+        // adicionar um novo produto à base de dados
+        $request = \Config\Services::request();
+        $params = array(
+            $request->getPost('combo_familia'),
+            $request->getPost('text_designacao'),
+            $request->getPost('text_descricao'),
+            $nome_ficheiro,
+            $request->getPost('text_preco'),
+            $request->getPost('combo_taxa'),
+            $request->getPost('text_quantidade'),
+            $request->getPost('text_detalhes'),
+        );
+
+        $this->query(
+            "
+                INSERT INTO stock_produtos VALUES(
+                    0,
+                    ?, ?, ?, ?, ?, ?, ?, ?,
+                    NOW()
+                )
+            ", $params);        
+    }
 }
