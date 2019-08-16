@@ -163,6 +163,14 @@ class Stocks extends BaseController{
         // carregar as taxas
         $data['taxas'] = $model->get_all_taxes();
 
+
+
+
+
+
+        $sucesso = '';
+        $erro = '';
+
         // tratar a submissao do formulario
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -170,18 +178,35 @@ class Stocks extends BaseController{
             $novo_ficheiro = round(microtime(true) * 1000) . '.'.pathinfo($_FILES["file_imagem"]["name"], PATHINFO_EXTENSION);
 
             $model = new StocksModel();
-            $model->product_add($novo_ficheiro);
 
-            // upload da imagem            
-            $target_file = '';
-            $target_file .= 'assets/product_images/';
-            $target_file .= $novo_ficheiro;
-            $file_success = move_uploaded_file($_FILES["file_imagem"]["tmp_name"], $target_file);
+            if($model->product_check()){
+                // erro - já existe outro produto com o mesmo nome
+                $erro = 'Já existe outro produto com o mesmo nome.';
+            }
+
+            if($erro == ''){
+                // upload da imagem            
+                $target_file = '';
+                $target_file .= 'assets/product_images/';
+                $target_file .= $novo_ficheiro;
+                $file_success = move_uploaded_file($_FILES["file_imagem"]["tmp_name"], $target_file);
+                
+                // registo do produto na base de dados
+                if($file_success) {
+                    $model->product_add($novo_ficheiro);
+                    $sucesso = 'Produto adicionado com sucesso.';
+                } else {
+                    $erro = 'Não foi possível adicionar o produto (Não foi feito upload de imagem para o servidor).';
+                }
+            }                        
         }
 
+        // passa para $data o erro ou sucesso
+        if($erro != '') { $data['error'] = $erro; }
+        if($sucesso != '') { $data['success'] = $sucesso; }
+
         // apresentar o formulário
-        echo view('stocks/produtos_adicionar', $data);
-        
+        echo view('stocks/produtos_adicionar', $data);        
     }
 
 
