@@ -209,6 +209,15 @@ class Stocks extends BaseController{
         echo view('stocks/produtos_adicionar', $data);        
     }
 
+    // ==================================================
+    public function produtos_editar($id){
+
+        helper('funcoes');
+        $id = aesDecrypt($id);
+
+
+    }
+
 
 
 

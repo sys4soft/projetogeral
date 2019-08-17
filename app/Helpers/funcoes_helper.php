@@ -1,6 +1,15 @@
 <?php
 
     // ==================================================
+    function aesEncrypt($valor_original){
+        return bin2hex(openssl_encrypt($valor_original, 'aes-256-cbc', AES_KEY, OPENSSL_RAW_DATA, AES_IV));
+    }
+
+    function aesDecrypt($valor_encriptado){
+        return openssl_decrypt(hex2bin($valor_encriptado), 'aes-256-cbc', AES_KEY, OPENSSL_RAW_DATA, AES_IV);
+    }
+
+    // ==================================================
     function verDados($array){
         echo '<pre>';
         echo 'Dados do Array<hr>';

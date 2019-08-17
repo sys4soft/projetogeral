@@ -1,5 +1,6 @@
 <?php 
 	$this->extend('layouts/layout_stocks');
+	helper('funcoes');
 ?>
 <?php $this->section('conteudo') ?>
 
@@ -31,10 +32,10 @@
 					<td class="text-center align-middle"><?php echo $produto['quantidade']?></td>
 					<td class="text-center align-middle"><?php echo $produto['taxa'] . ' (' .$produto['percentagem']. '%)'?></td>
 					<td class="text-right">
-						<a href="<?php echo site_url('stocks/produtos_editar/'.$produto['id_produto'])?>" class="btn btn-primary btn-sm btn-100 m-1">
+						<a href="<?php echo site_url('stocks/produtos_editar/'.aesEncrypt($produto['id_produto']))?>" class="btn btn-primary btn-sm btn-100 m-1">
 							<i class="fa fa-pencil mr-2"></i>Editar
 						</a>											
-						<a href="<?php echo site_url('stocks/produtos_eliminar/'.$produto['id_produto'])?>" class="btn btn-danger btn-sm btn-100 m-1">
+						<a href="<?php echo site_url('stocks/produtos_eliminar/'.aesEncrypt($produto['id_produto']))?>" class="btn btn-danger btn-sm btn-100 m-1">
 							<i class="fa fa-trash mr-2"></i>Eliminar
 						</a>
 					</td>
