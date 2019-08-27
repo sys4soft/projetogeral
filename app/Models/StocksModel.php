@@ -248,7 +248,7 @@ class StocksModel extends Model{
         $params = array( $id );
         return $this->query(
             "SELECT * FROM stock_produtos WHERE id_produto = ?", $params
-        )->getResult('array');
+        )->getResult('array')[0];
     }
 
     // ===========================================
