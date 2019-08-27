@@ -5,8 +5,18 @@
         return bin2hex(openssl_encrypt($valor_original, 'aes-256-cbc', AES_KEY, OPENSSL_RAW_DATA, AES_IV));
     }
 
+    // ==================================================
     function aesDecrypt($valor_encriptado){
-        return openssl_decrypt(hex2bin($valor_encriptado), 'aes-256-cbc', AES_KEY, OPENSSL_RAW_DATA, AES_IV);
+
+        $resultado = -1;
+        try {
+            $resultado = openssl_decrypt(hex2bin($valor_encriptado), 'aes-256-cbc', AES_KEY, OPENSSL_RAW_DATA, AES_IV);
+            if(gettype($resultado) == 'boolean'){ return -1; }
+        } catch (\Throwable $th) {
+            return -1;
+        }
+
+        return $resultado;
     }
 
     // ==================================================

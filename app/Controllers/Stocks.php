@@ -163,11 +163,6 @@ class Stocks extends BaseController{
         // carregar as taxas
         $data['taxas'] = $model->get_all_taxes();
 
-
-
-
-
-
         $sucesso = '';
         $erro = '';
 
@@ -214,8 +209,14 @@ class Stocks extends BaseController{
 
         helper('funcoes');
         $id = aesDecrypt($id);
-
-
+        if($id == -1) { return; }
+        
+        // buscar os dados do produto a editar
+        $model = new StocksModel();
+        $results = $model->get_product($id);
+        echo '<pre>';
+        print_r($results);
+        echo '</pre>';
     }
 
 

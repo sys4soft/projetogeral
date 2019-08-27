@@ -242,6 +242,16 @@ class StocksModel extends Model{
     }
 
     // ===========================================
+    public function get_product($id){
+
+        // returns a specific product
+        $params = array( $id );
+        return $this->query(
+            "SELECT * FROM stock_produtos WHERE id_produto = ?", $params
+        )->getResult('array');
+    }
+
+    // ===========================================
     public function product_check(){
         
         // verifica se já existe um produto com o mesmo nome
