@@ -311,4 +311,36 @@ class StocksModel extends Model{
                 )
             ", $params);        
     }
+
+    // ===========================================
+    public function product_edit($id_produto, $imagem = ''){
+
+        $request = \Config\Services::request();        
+        // atualizar o produto sem nova imagem
+        if($imagem == ''){
+            $params = array(
+                $request->getPost('combo_familia'),
+                $request->getPost('text_designacao'),
+                $request->getPost('text_descricao'),
+                $request->getPost('text_preco'),
+                $request->getPost('combo_taxa'),
+                $request->getPost('text_quantidade'),
+                $request->getPost('text_detalhes'),
+                $id_produto
+            );
+
+            $this->query(
+                "UPDATE stock_produtos SET ".
+                "id_familia = ?, ".
+                "designacao = ?, ".
+                "descricao = ?, ".
+                "preco = ?, ".
+                "id_taxa = ?, ".
+                "quantidade = ?, ".
+                "detalhes = ?, ".
+                "atualizacao = NOW() ".
+                "WHERE id_produto = ?", $params
+            );
+        }     
+    }
 }

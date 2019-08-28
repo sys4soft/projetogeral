@@ -212,6 +212,7 @@ class Stocks extends BaseController{
         if($id == -1) { return; }
 
         $model = new StocksModel();
+        $erro = '';
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             
@@ -220,14 +221,11 @@ class Stocks extends BaseController{
             // print_r($_POST);
             // print_R($_FILES);
             // echo '</pre>';
-            // die();
-
-            $erro = '';
-            $sucesso = '';
+            // die();            
             
             // verificação da existência de outro produto com o mesmo nome
             $request = \Config\Services::request();
-            if($model->product_check_check($id, $request->getPost('text_designacao'))){
+            if($model->product_other_check($id, $request->getPost('text_designacao'))){
                 // erro - já existe outro produto com o mesmo nome
                 $erro = 'Já existe outro produto com o mesmo nome.';
             }
@@ -239,9 +237,6 @@ class Stocks extends BaseController{
                     !is_uploaded_file($_FILES['file_imagem']['tmp_name'])){
                     $existe_ficheiro_para_upload = false;
                 }
-
-
-
 
                 // verifica se é necessário carregar novo ficheiro
                 if($existe_ficheiro_para_upload){
@@ -259,44 +254,31 @@ class Stocks extends BaseController{
 
                     // atualizacao do produto na base de dados
                     if($file_success) {
-                        $model->product_edit($novo_ficheiro);
-                        $sucesso = 'Produto adicionado com sucesso.';
+                        $model->product_edit($id, $novo_ficheiro);
                     } else {
                         $erro = 'Não foi possível adicionar o produto (Não foi feito upload de imagem para o servidor).';
                     }
                 } else {
 
                     // atualiza os dados do produto sem imagem nova
-                    $model->product_edit('');
-                }              
-                                
+                    $model->product_edit($id);
+                } 
+                
+                if($erro == ''){
+                    $this->produtos();
+                    return;
+                }
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
         
         // buscar os dados do produto a editar        
         $result = $model->get_product($id);
         
+        // se existir erro, passa o mesmo para a view
+        if($erro != ''){
+            $data['error'] = $erro;
+        }
+
         $data['produto'] = $result;
         
         // carregar familias    
