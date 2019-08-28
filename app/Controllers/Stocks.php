@@ -210,11 +210,92 @@ class Stocks extends BaseController{
         helper('funcoes');
         $id = aesDecrypt($id);
         if($id == -1) { return; }
-        
-        // buscar os dados do produto a editar
-        $model = new StocksModel();
-        $result = $model->get_product($id);
 
+        $model = new StocksModel();
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            
+            // echo 'estou aqui.';
+            // echo '<pre>';
+            // print_r($_POST);
+            // print_R($_FILES);
+            // echo '</pre>';
+            // die();
+
+            $erro = '';
+            $sucesso = '';
+            
+            // verificação da existência de outro produto com o mesmo nome
+            $request = \Config\Services::request();
+            if($model->product_check_check($id, $request->getPost('text_designacao'))){
+                // erro - já existe outro produto com o mesmo nome
+                $erro = 'Já existe outro produto com o mesmo nome.';
+            }
+
+            if($erro == ''){
+
+                $existe_ficheiro_para_upload = true;
+                if( !file_exists($_FILES['file_imagem']['tmp_name']) || 
+                    !is_uploaded_file($_FILES['file_imagem']['tmp_name'])){
+                    $existe_ficheiro_para_upload = false;
+                }
+
+
+
+
+                // verifica se é necessário carregar novo ficheiro
+                if($existe_ficheiro_para_upload){
+
+                    // atualiza os dados do produto com imagem nova
+                    
+                    // definição do nome da imagem do produto
+                    $novo_ficheiro = round(microtime(true) * 1000) . '.'.pathinfo($_FILES["file_imagem"]["name"], PATHINFO_EXTENSION);
+
+                    // upload da imagem            
+                    $target_file = '';
+                    $target_file .= 'assets/product_images/';
+                    $target_file .= $novo_ficheiro;
+                    $file_success = move_uploaded_file($_FILES["file_imagem"]["tmp_name"], $target_file);
+
+                    // atualizacao do produto na base de dados
+                    if($file_success) {
+                        $model->product_edit($novo_ficheiro);
+                        $sucesso = 'Produto adicionado com sucesso.';
+                    } else {
+                        $erro = 'Não foi possível adicionar o produto (Não foi feito upload de imagem para o servidor).';
+                    }
+                } else {
+
+                    // atualiza os dados do produto sem imagem nova
+                    $model->product_edit('');
+                }              
+                                
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+        
+        // buscar os dados do produto a editar        
+        $result = $model->get_product($id);
         
         $data['produto'] = $result;
         
@@ -226,7 +307,6 @@ class Stocks extends BaseController{
         
         // apresentar o formulário de edição do produto
         echo view('stocks/produtos_editar', $data);
-
     }
 
 

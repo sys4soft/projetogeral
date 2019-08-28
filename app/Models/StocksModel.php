@@ -77,7 +77,7 @@ class StocksModel extends Model{
             $id_family
         );
 
-        $results = $this->query("SELECT * FROM stock_familias WHERE designacao = ? AND id_familia != ?", $params)->getResult('array');
+        $results = $this->query("SELECT * FROM stock_familias WHERE designacao = ? AND id_familia <> ?", $params)->getResult('array');
         if(count($results) != 0){
             return true;
         } else {
@@ -179,7 +179,7 @@ class StocksModel extends Model{
             $id_taxa
         );
 
-        $results = $this->query("SELECT * FROM stock_taxas WHERE designacao = ? AND id_taxa != ?", $params)->getResult('array');
+        $results = $this->query("SELECT * FROM stock_taxas WHERE designacao = ? AND id_taxa <> ?", $params)->getResult('array');
         if(count($results) != 0){
             return true;
         } else {
@@ -266,7 +266,24 @@ class StocksModel extends Model{
         } else {
             return false;
         } 
+    }
 
+    // ===========================================
+    public function product_other_check($id_produto, $designacao){
+        
+        // verifica se já outro produto com o mesmo nome
+        $request = \Config\Services::request();
+        $params = array(
+            $designacao,
+            $id_produto
+        );
+
+        $results = $this->query("SELECT designacao FROM stock_produtos WHERE designacao = ? AND id_produto <> ?", $params)->getResult('array');
+        if(count($results) != 0){
+            return true;
+        } else {
+            return false;
+        } 
     }
 
     // ===========================================

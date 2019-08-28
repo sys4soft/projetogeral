@@ -1,18 +1,11 @@
 <?php 
     $this->extend('layouts/layout_stocks');    
+
+    // tratar o id do produto a editar
+    helper('funcoes');
+    $id = aesEncrypt($produto['id_produto']);
 ?>
 <?php $this->section('conteudo') ?>
-
-
-<?php 
-// echo 'resultados:';
-// echo '<pre>';
-// print_r($familias);
-// echo '<hr>';
-// print_r($taxas);
-// echo '</pre>';
-?>
-
 
 <div class="row mt-2">
 	<div class="col-12">
@@ -21,7 +14,7 @@
     </div>
 
     <div class="col-12 mt-3">
-        <form action="<?php echo site_url('stocks/produtos_editar')?>" method="post" enctype="multipart/form-data">
+        <form action="<?php echo site_url('stocks/produtos_editar/'.$id)?>" method="post" enctype="multipart/form-data">
 
             <?php if(isset($error)): ?>
                 <div class="alert alert-danger p-3 text-center">
