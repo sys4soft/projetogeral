@@ -332,7 +332,6 @@ class Stocks extends BaseController{
             // redirecionamento para stocks/taxas
             return redirect()->to(site_url('stocks/taxas'));
         }
-
         echo view('stocks/taxas_eliminar', $data);
     }
 }
