@@ -87,6 +87,8 @@
                 <div class="row">
                     <div class="col-sm-5 col-12">
                         <img src="<?php echo base_url('assets/product_images/'.$produto['imagem'])?>" class="img-thumbnail">
+                        <br>
+                        <small>Imagem: <b><?php echo $produto['imagem'] ?></b></small>
                     </div>
                     <div class="col-sm-7 col-12">
                         <label>Imagem do produto:</label>

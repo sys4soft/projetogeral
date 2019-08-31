@@ -238,6 +238,8 @@ class Stocks extends BaseController{
                     $existe_ficheiro_para_upload = false;
                 }
 
+
+
                 // verifica se é necessário carregar novo ficheiro
                 if($existe_ficheiro_para_upload){
 
