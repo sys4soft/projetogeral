@@ -293,6 +293,27 @@ class Stocks extends BaseController{
         echo view('stocks/produtos_editar', $data);
     }
 
+    // ==================================================
+    public function produtos_eliminar($id_produto, $resposta = 'nao'){
+        
+        helper('funcoes');
+        $id_produto = aesDecrypt($id_produto);
+        if($id_produto == -1) { return; }
+
+        $model = new StocksModel();
+        $data['produto'] = $model->get_product($id_produto);
+
+        if($resposta == 'sim'){
+            
+            // eliminação do produto
+            $model->delete_product($id_produto);
+
+            // redirecionamento para stocks/produtos
+            return redirect()->to(site_url('stocks/produtos'));
+        }
+
+        echo view('stocks/produtos_eliminar', $data);
+    }
 
 
 

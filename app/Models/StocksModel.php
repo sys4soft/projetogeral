@@ -373,4 +373,16 @@ class StocksModel extends Model{
             );
         } 
     }
+
+    // ===========================================
+    public function delete_product($id_produto){
+
+        // eliminar o produto
+        $params = array(
+            $id_produto
+        );
+
+        // delete the selected product
+        $this->query("DELETE FROM stock_produtos WHERE id_produto = ?", $params);        
+    }
 }
