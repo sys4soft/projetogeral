@@ -4,8 +4,12 @@
 
     $gestor = new cl_gestorBD();
 
+    // define status
+    $results['STATUS'] = 'OK';
+    $results['MESSAGE'] = 'SUCCESS';
+
     // get all products
-    $results['Results'] = $gestor->EXE_QUERY(
+    $results['RESULTS'] = $gestor->EXE_QUERY(
         "SELECT " .
             "p.id_produto, ".
             "p.id_familia, ".
@@ -24,7 +28,7 @@
     );
 
     // token
-    $results['Token'] = $Token;
+    $results['TOKEN'] = $token;
 
     // output do endpoint
     echo json_encode($results);

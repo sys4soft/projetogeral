@@ -4,6 +4,9 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
+    /* version */
+    define('API_VERSION',   'v1.0.0');
+
     /* mysql */
     define('DB_SERVER',     'localhost');
     define('DB_USERNAME',   'root');

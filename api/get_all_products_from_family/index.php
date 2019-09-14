@@ -4,10 +4,15 @@
 
     // check if id_familia was given
     if(!key_exists('id_familia', $data)){
-        $response['status'] = 'Missing id_familia.';
+        $response['STATUS'] = 'ERROR';
+        $response['MESSAGE'] = 'Missing id_familia.';
+        $response['TOKEN'] = $token;
         echo json_encode($response);
         die();
     }
+
+    $results['STATUS'] = 'OK';
+    $results['MESSAGE'] = 'SUCCESS';
 
     $gestor = new cl_gestorBD();
 
@@ -15,7 +20,7 @@
     $params = Array(
         ':id_familia' => $data['id_familia']
     );
-    $results['Results'] = $gestor->EXE_QUERY(
+    $results['RESULTS'] = $gestor->EXE_QUERY(
         "SELECT " .
             "p.id_produto, ".
             "p.id_familia, ".
@@ -35,7 +40,7 @@
     , $params);
 
     // token
-    $results['Token'] = $Token;
+    $results['TOKEN'] = $token;
 
     // output do endpoint
     echo json_encode($results);

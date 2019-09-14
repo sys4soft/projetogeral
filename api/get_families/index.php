@@ -4,11 +4,14 @@
 
     $gestor = new cl_gestorBD();
 
+    $response['STATUS'] = 'OK';
+    $response['MESSAGE'] = 'SUCCESS';
+
     // get all product families
-    $results['Results'] = $gestor->EXE_QUERY("SELECT * FROM stock_familias");
+    $response['RESULTS'] = $gestor->EXE_QUERY("SELECT * FROM stock_familias");
 
     // token
-    $results['Token'] = $Token;
+    $response['TOKEN'] = $token;
 
     // output do endpoint
     echo json_encode($results);

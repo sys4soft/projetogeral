@@ -4,7 +4,9 @@
 
     // check if id_produto was given
     if(!key_exists('id_produto', $data)){
-        $response['status'] = 'Missing id_produto.';
+        $response['STATUS'] = 'KO';
+        $response['MESSAGE'] = 'Missing id_produto.';
+        $response['TOKEN'] = $token;
         echo json_encode($response);
         die();
     }
@@ -15,19 +17,19 @@
     $params = Array(
         ':id_produto' => $data['id_produto']
     );
-    $results['Results'] = $gestor->EXE_QUERY(
+    $response['RESULTS'] = $gestor->EXE_QUERY(
         "SELECT " .
         "id_produto, designacao AS nome_produto, quantidade " .        
         "FROM stock_produtos ".        
         "WHERE id_produto = :id_produto"
     , $params);
 
-    if(count($results['Results']) == 0){
-        $results['status'] = 'Inexistent product.';
+    if(count($response['RESULTS']) == 0){
+        $response['MESSAGE'] = 'Inexistent product.';
     }
 
     // token
-    $results['Token'] = $Token;
+    $response['TOKEN'] = $token;
 
     // output do endpoint
-    echo json_encode($results);
+    echo json_encode($response);
