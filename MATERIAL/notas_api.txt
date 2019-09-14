@@ -1,0 +1,13 @@
+
+API:
+
+    FEITO - responder a 'teste' - verificar se a API está a funcionar
+
+    FEITO - devolver a lista de famílias de produtos
+    FEITO - devolver a lista de todos os produtos
+    FEITO - devolver os dados de um produto específico
+    FEITO - devolver a quantidade de unidades em stock de um produto específico
+    FEITO - devolver a lista de produtos de uma determinada família    
+
+    remover dados de stock - produto específico (VENDA)
+    adicionar dados de stock - agregar unidades a um produto específico
