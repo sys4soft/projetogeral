@@ -1,79 +1,80 @@
--- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Jul 21, 2019 at 01:50 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.3
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- --------------------------------------------------------
+-- Anfitrião:                    localhost
+-- Versão do servidor:           10.1.38-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
+-- HeidiSQL Versão:              10.2.0.5599
+-- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
---
--- Database: `projetogeral`
---
 
--- --------------------------------------------------------
+-- Dumping database structure for projetogeral
+DROP DATABASE IF EXISTS `projetogeral`;
+CREATE DATABASE IF NOT EXISTS `projetogeral` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `projetogeral`;
 
---
--- Table structure for table `criptografia`
---
+-- Dumping structure for table projetogeral.criptografia
+DROP TABLE IF EXISTS `criptografia`;
+CREATE TABLE IF NOT EXISTS `criptografia` (
+  `id_cartao` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `numero_cartao` varbinary(200) NOT NULL,
+  PRIMARY KEY (`id_cartao`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
-CREATE TABLE `criptografia` (
-  `id_cartao` int(10) UNSIGNED NOT NULL,
-  `numero_cartao` varbinary(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- Dumping data for table projetogeral.criptografia: ~2 rows (approximately)
+/*!40000 ALTER TABLE `criptografia` DISABLE KEYS */;
+INSERT IGNORE INTO `criptografia` (`id_cartao`, `numero_cartao`) VALUES
+	(1, _binary 0xD55B7E6C900DBD7D066FC3D11DA02BE1),
+	(2, _binary 0x0BB4273EC93108EDB6C2AF3CC68060EE);
+/*!40000 ALTER TABLE `criptografia` ENABLE KEYS */;
 
---
--- Dumping data for table `criptografia`
---
+-- Dumping structure for table projetogeral.stock_apps
+DROP TABLE IF EXISTS `stock_apps`;
+CREATE TABLE IF NOT EXISTS `stock_apps` (
+  `id_app` int(11) NOT NULL AUTO_INCREMENT,
+  `app_name` varchar(50) NOT NULL,
+  `app_key` varchar(50) NOT NULL,
+  `active` smallint(6) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_app`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
-INSERT INTO `criptografia` (`id_cartao`, `numero_cartao`) VALUES
-(1, 0xd55b7e6c900dbd7d066fc3d11da02be1),
-(2, 0x0bb4273ec93108edb6c2af3cc68060ee);
+-- Dumping data for table projetogeral.stock_apps: ~3 rows (approximately)
+/*!40000 ALTER TABLE `stock_apps` DISABLE KEYS */;
+INSERT IGNORE INTO `stock_apps` (`id_app`, `app_name`, `app_key`, `active`) VALUES
+	(1, 'Aplicacao 1', 'DGXhTjiGPjsBb96SrYkA8NXWhzQisLVF', 0),
+	(2, 'Aplicacao 2', 'tC4mcHsdVHrYK0m73GnyS4H9g251HnId', 1),
+	(3, 'Aplicacao 3', 'UDk3F9CIrryPtslTkXTJ4iwt2nn8jNF9', 1);
+/*!40000 ALTER TABLE `stock_apps` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `stock_familias`
---
-
-CREATE TABLE `stock_familias` (
-  `id_familia` int(11) NOT NULL,
+-- Dumping structure for table projetogeral.stock_familias
+DROP TABLE IF EXISTS `stock_familias`;
+CREATE TABLE IF NOT EXISTS `stock_familias` (
+  `id_familia` int(11) NOT NULL AUTO_INCREMENT,
   `id_parent` int(11) NOT NULL,
   `designacao` varchar(50) NOT NULL,
-  `imagem` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `imagem` varchar(250) NOT NULL,
+  PRIMARY KEY (`id_familia`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `stock_familias`
---
+-- Dumping data for table projetogeral.stock_familias: ~6 rows (approximately)
+/*!40000 ALTER TABLE `stock_familias` DISABLE KEYS */;
+INSERT IGNORE INTO `stock_familias` (`id_familia`, `id_parent`, `designacao`, `imagem`) VALUES
+	(2, 7, 'Computadores desktop', ''),
+	(3, 7, 'Computadores portáteis', ''),
+	(4, 0, 'Teclados PC', ''),
+	(5, 4, 'Teclados Gaming', ''),
+	(6, 5, 'Teclado XPTO', ''),
+	(7, 0, 'Computadores', '');
+/*!40000 ALTER TABLE `stock_familias` ENABLE KEYS */;
 
-INSERT INTO `stock_familias` (`id_familia`, `id_parent`, `designacao`, `imagem`) VALUES
-(2, 7, 'Computadores desktop', ''),
-(3, 7, 'Computadores portáteis', ''),
-(4, 0, 'Teclados PC', ''),
-(5, 4, 'Teclados Gaming', ''),
-(6, 5, 'Teclado XPTO', ''),
-(7, 0, 'Computadores', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `stock_movimentos`
---
-
-CREATE TABLE `stock_movimentos` (
-  `id_movimento` int(11) NOT NULL,
+-- Dumping structure for table projetogeral.stock_movimentos
+DROP TABLE IF EXISTS `stock_movimentos`;
+CREATE TABLE IF NOT EXISTS `stock_movimentos` (
+  `id_movimento` int(11) NOT NULL AUTO_INCREMENT,
   `source` varchar(20) NOT NULL,
   `id_produto` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL,
@@ -82,17 +83,18 @@ CREATE TABLE `stock_movimentos` (
   `preco_total` decimal(10,2) NOT NULL,
   `entrada_saida` varchar(20) NOT NULL,
   `data_movimento` datetime NOT NULL,
-  `observacoes` text NOT NULL
+  `observacoes` text NOT NULL,
+  PRIMARY KEY (`id_movimento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- Dumping data for table projetogeral.stock_movimentos: ~0 rows (approximately)
+/*!40000 ALTER TABLE `stock_movimentos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `stock_movimentos` ENABLE KEYS */;
 
---
--- Table structure for table `stock_produtos`
---
-
-CREATE TABLE `stock_produtos` (
-  `id_produto` int(11) NOT NULL,
+-- Dumping structure for table projetogeral.stock_produtos
+DROP TABLE IF EXISTS `stock_produtos`;
+CREATE TABLE IF NOT EXISTS `stock_produtos` (
+  `id_produto` int(11) NOT NULL AUTO_INCREMENT,
   `id_familia` int(11) NOT NULL,
   `designacao` varchar(50) NOT NULL,
   `descricao` varchar(1000) NOT NULL,
@@ -101,44 +103,37 @@ CREATE TABLE `stock_produtos` (
   `id_taxa` int(11) NOT NULL,
   `quantidade` int(11) NOT NULL,
   `detalhes` text NOT NULL,
-  `atualizacao` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `atualizacao` datetime NOT NULL,
+  PRIMARY KEY (`id_produto`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `stock_produtos`
---
+-- Dumping data for table projetogeral.stock_produtos: ~2 rows (approximately)
+/*!40000 ALTER TABLE `stock_produtos` DISABLE KEYS */;
+INSERT IGNORE INTO `stock_produtos` (`id_produto`, `id_familia`, `designacao`, `descricao`, `imagem`, `preco`, `id_taxa`, `quantidade`, `detalhes`, `atualizacao`) VALUES
+	(1, 2, 'Computador Gamer', 'Computador com os melhores componentes...', '1565975608058.jpg', 1000.00, 2, 100, 'Nada nos detalhes.', '2019-08-16 18:13:28'),
+	(2, 3, 'Computador de viagem', 'texto da descrição', '1567005693800.jpg', 2500.00, 2, 10, 'texto dos detalhes', '2019-08-28 16:21:33');
+/*!40000 ALTER TABLE `stock_produtos` ENABLE KEYS */;
 
-INSERT INTO `stock_produtos` (`id_produto`, `id_familia`, `designacao`, `descricao`, `imagem`, `preco`, `id_taxa`, `quantidade`, `detalhes`, `atualizacao`) VALUES
-(1, 0, 'Computador x123', 'texto da descrição', 'computador_x123.jpg', '1000.00', 0, 12, 'texto dos detalhes', '2019-07-21 00:18:41');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `stock_taxas`
---
-
-CREATE TABLE `stock_taxas` (
-  `id_taxa` int(11) NOT NULL,
+-- Dumping structure for table projetogeral.stock_taxas
+DROP TABLE IF EXISTS `stock_taxas`;
+CREATE TABLE IF NOT EXISTS `stock_taxas` (
+  `id_taxa` int(11) NOT NULL AUTO_INCREMENT,
   `designacao` varchar(50) NOT NULL,
-  `percentagem` decimal(5,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `percentagem` decimal(5,2) NOT NULL,
+  PRIMARY KEY (`id_taxa`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `stock_taxas`
---
+-- Dumping data for table projetogeral.stock_taxas: ~2 rows (approximately)
+/*!40000 ALTER TABLE `stock_taxas` DISABLE KEYS */;
+INSERT IGNORE INTO `stock_taxas` (`id_taxa`, `designacao`, `percentagem`) VALUES
+	(1, 'Taxa Maior', 15.00),
+	(2, 'Taxa Menor', 5.00);
+/*!40000 ALTER TABLE `stock_taxas` ENABLE KEYS */;
 
-INSERT INTO `stock_taxas` (`id_taxa`, `designacao`, `percentagem`) VALUES
-(1, 'Taxa Maior', '15.00'),
-(2, 'Taxa Menor', '5.00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id_user` int(10) UNSIGNED NOT NULL,
+-- Dumping structure for table projetogeral.users
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id_user` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
   `passwrd` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -148,99 +143,18 @@ CREATE TABLE `users` (
   `purl` varchar(20) NOT NULL,
   `purl_time` datetime NOT NULL,
   `active` bit(1) NOT NULL DEFAULT b'1',
-  `deleted` int(11) UNSIGNED NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `deleted` int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `users`
---
+-- Dumping data for table projetogeral.users: ~3 rows (approximately)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT IGNORE INTO `users` (`id_user`, `username`, `passwrd`, `name`, `email`, `last_login`, `profile`, `purl`, `purl_time`, `active`, `deleted`) VALUES
+	(2, 'joao', 'd5d849bdba01233f855b16da071127ae', 'João Ribeiro', 'teste@gmail.com', '2019-05-25 19:35:36', 'admin', '', '0000-00-00 00:00:00', b'1', 0),
+	(7, 'ana', 'd5d849bdba01233f855b16da071127ae', 'Ana Moderadora', 'Ana@gmail.com', '2019-05-25 19:34:57', 'moderator', '', '0000-00-00 00:00:00', b'1', 0),
+	(8, 'teste', 'e7cb549a4cb5aadb4459b03fd67d553b', 'teste', 'teste1@gmail.com', '0000-00-00 00:00:00', 'user', '', '0000-00-00 00:00:00', b'1', 0);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
-INSERT INTO `users` (`id_user`, `username`, `passwrd`, `name`, `email`, `last_login`, `profile`, `purl`, `purl_time`, `active`, `deleted`) VALUES
-(2, 'joao', 'd5d849bdba01233f855b16da071127ae', 'João Ribeiro', 'teste@gmail.com', '2019-05-25 19:35:36', 'admin', '', '0000-00-00 00:00:00', b'1', 0),
-(7, 'ana', 'd5d849bdba01233f855b16da071127ae', 'Ana Moderadora', 'Ana@gmail.com', '2019-05-25 19:34:57', 'moderator', '', '0000-00-00 00:00:00', b'1', 0),
-(8, 'teste', 'e7cb549a4cb5aadb4459b03fd67d553b', 'teste', 'teste1@gmail.com', '0000-00-00 00:00:00', 'user', '', '0000-00-00 00:00:00', b'1', 0);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `criptografia`
---
-ALTER TABLE `criptografia`
-  ADD PRIMARY KEY (`id_cartao`);
-
---
--- Indexes for table `stock_familias`
---
-ALTER TABLE `stock_familias`
-  ADD PRIMARY KEY (`id_familia`);
-
---
--- Indexes for table `stock_movimentos`
---
-ALTER TABLE `stock_movimentos`
-  ADD PRIMARY KEY (`id_movimento`);
-
---
--- Indexes for table `stock_produtos`
---
-ALTER TABLE `stock_produtos`
-  ADD PRIMARY KEY (`id_produto`);
-
---
--- Indexes for table `stock_taxas`
---
-ALTER TABLE `stock_taxas`
-  ADD PRIMARY KEY (`id_taxa`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_user`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `criptografia`
---
-ALTER TABLE `criptografia`
-  MODIFY `id_cartao` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `stock_familias`
---
-ALTER TABLE `stock_familias`
-  MODIFY `id_familia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `stock_movimentos`
---
-ALTER TABLE `stock_movimentos`
-  MODIFY `id_movimento` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `stock_produtos`
---
-ALTER TABLE `stock_produtos`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `stock_taxas`
---
-ALTER TABLE `stock_taxas`
-  MODIFY `id_taxa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-COMMIT;
-
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
