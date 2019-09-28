@@ -14,4 +14,4 @@
     $response['TOKEN'] = $token;
 
     // output do endpoint
-    echo json_encode($results);
+    echo json_encode($response);
