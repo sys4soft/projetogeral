@@ -1,0 +1,9 @@
+
+app_key
+id_produto
+quantidade
+texto
+
+> verificar se existe o produto
+> verificar se existe stock em quantidade suficiente.
+> atualização dos dados do movimento na base de dados
