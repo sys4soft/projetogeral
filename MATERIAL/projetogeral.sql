@@ -13,12 +13,10 @@
 
 
 -- Dumping database structure for projetogeral
-DROP DATABASE IF EXISTS `projetogeral`;
 CREATE DATABASE IF NOT EXISTS `projetogeral` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `projetogeral`;
 
 -- Dumping structure for table projetogeral.criptografia
-DROP TABLE IF EXISTS `criptografia`;
 CREATE TABLE IF NOT EXISTS `criptografia` (
   `id_cartao` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `numero_cartao` varbinary(200) NOT NULL,
@@ -33,7 +31,6 @@ INSERT IGNORE INTO `criptografia` (`id_cartao`, `numero_cartao`) VALUES
 /*!40000 ALTER TABLE `criptografia` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.stock_apps
-DROP TABLE IF EXISTS `stock_apps`;
 CREATE TABLE IF NOT EXISTS `stock_apps` (
   `id_app` int(11) NOT NULL AUTO_INCREMENT,
   `app_name` varchar(50) NOT NULL,
@@ -45,13 +42,12 @@ CREATE TABLE IF NOT EXISTS `stock_apps` (
 -- Dumping data for table projetogeral.stock_apps: ~3 rows (approximately)
 /*!40000 ALTER TABLE `stock_apps` DISABLE KEYS */;
 INSERT IGNORE INTO `stock_apps` (`id_app`, `app_name`, `app_key`, `active`) VALUES
-	(1, 'Aplicacao 1', 'DGXhTjiGPjsBb96SrYkA8NXWhzQisLVF', 0),
+	(1, 'Aplicacao 1', 'DGXhTjiGPjsBb96SrYkA8NXWhzQisLVF', 1),
 	(2, 'Aplicacao 2', 'tC4mcHsdVHrYK0m73GnyS4H9g251HnId', 1),
 	(3, 'Aplicacao 3', 'UDk3F9CIrryPtslTkXTJ4iwt2nn8jNF9', 1);
 /*!40000 ALTER TABLE `stock_apps` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.stock_familias
-DROP TABLE IF EXISTS `stock_familias`;
 CREATE TABLE IF NOT EXISTS `stock_familias` (
   `id_familia` int(11) NOT NULL AUTO_INCREMENT,
   `id_parent` int(11) NOT NULL,
@@ -72,17 +68,14 @@ INSERT IGNORE INTO `stock_familias` (`id_familia`, `id_parent`, `designacao`, `i
 /*!40000 ALTER TABLE `stock_familias` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.stock_movimentos
-DROP TABLE IF EXISTS `stock_movimentos`;
 CREATE TABLE IF NOT EXISTS `stock_movimentos` (
   `id_movimento` int(11) NOT NULL AUTO_INCREMENT,
-  `source` varchar(20) NOT NULL,
+  `id_app` int(11) NOT NULL,
   `id_produto` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `id_fornecedor` int(11) NOT NULL,
   `quantidade` decimal(10,2) NOT NULL,
   `preco_total` decimal(10,2) NOT NULL,
   `entrada_saida` varchar(20) NOT NULL,
-  `data_movimento` datetime NOT NULL,
+  `data_movimento` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `observacoes` text NOT NULL,
   PRIMARY KEY (`id_movimento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -92,7 +85,6 @@ CREATE TABLE IF NOT EXISTS `stock_movimentos` (
 /*!40000 ALTER TABLE `stock_movimentos` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.stock_produtos
-DROP TABLE IF EXISTS `stock_produtos`;
 CREATE TABLE IF NOT EXISTS `stock_produtos` (
   `id_produto` int(11) NOT NULL AUTO_INCREMENT,
   `id_familia` int(11) NOT NULL,
@@ -110,12 +102,11 @@ CREATE TABLE IF NOT EXISTS `stock_produtos` (
 -- Dumping data for table projetogeral.stock_produtos: ~2 rows (approximately)
 /*!40000 ALTER TABLE `stock_produtos` DISABLE KEYS */;
 INSERT IGNORE INTO `stock_produtos` (`id_produto`, `id_familia`, `designacao`, `descricao`, `imagem`, `preco`, `id_taxa`, `quantidade`, `detalhes`, `atualizacao`) VALUES
-	(1, 2, 'Computador Gamer', 'Computador com os melhores componentes...', '1565975608058.jpg', 1000.00, 2, 100, 'Nada nos detalhes.', '2019-08-16 18:13:28'),
+	(1, 3, 'Computador Gamer', 'Computador com os melhores componentes...', '1565975608058.jpg', 1000.00, 2, 100, 'Nada nos detalhes.', '2019-08-16 18:13:28'),
 	(2, 3, 'Computador de viagem', 'texto da descrição', '1567005693800.jpg', 2500.00, 2, 10, 'texto dos detalhes', '2019-08-28 16:21:33');
 /*!40000 ALTER TABLE `stock_produtos` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.stock_taxas
-DROP TABLE IF EXISTS `stock_taxas`;
 CREATE TABLE IF NOT EXISTS `stock_taxas` (
   `id_taxa` int(11) NOT NULL AUTO_INCREMENT,
   `designacao` varchar(50) NOT NULL,
@@ -131,7 +122,6 @@ INSERT IGNORE INTO `stock_taxas` (`id_taxa`, `designacao`, `percentagem`) VALUES
 /*!40000 ALTER TABLE `stock_taxas` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.users
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id_user` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
