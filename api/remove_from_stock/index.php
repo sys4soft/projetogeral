@@ -56,8 +56,41 @@
         echo json_encode($response);
         die();
     }
+
+    // notes
+    $observacoes = '';
+    if(key_exists('observacoes', $data)){
+        $observacoes = $data['observacoes'];
+    }  
     
-    // remove from stock
+    // buscar os dados do produto selecionado
+    $params = Array(
+        ':id_produto' => $data['id_produto']
+    );
+    $results = $gestor->EXE_QUERY(
+        "SELECT *, stock_produtos.id_taxa AS produto_id_taxa FROM stock_produtos ".
+        "LEFT JOIN stock_taxas ".
+        "ON stock_produtos.id_taxa = stock_taxas.id_taxa ".
+        "WHERE stock_produtos.id_produto = :id_produto"
+    , $params);
+
+    $produto = $results[0];
+
+    // without taxes 
+    $preco_total = $data['quantidade']*$produto['preco'];
+
+    if($produto['produto_id_taxa'] != 0){
+        // with taxes
+        $preco_total = $preco_total * (1 + ($produto['percentagem']/100));
+    }
+    
+    echo $preco_total;
+    die();
+    
+
+    // executar os cálculos para perceber o preço total
+
+
     // insert stock_movimentos ...
     // update stock_produtos set ...
     
