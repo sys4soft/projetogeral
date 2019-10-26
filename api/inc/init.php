@@ -47,5 +47,7 @@
             $response['TOKEN'] = $token;
             echo json_encode($response);
             die();
+        } else {
+            $data['app_id'] = $dTemp[0]['id_app'];
         }
     }    

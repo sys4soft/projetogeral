@@ -17,6 +17,7 @@ CREATE DATABASE IF NOT EXISTS `projetogeral` /*!40100 DEFAULT CHARACTER SET lati
 USE `projetogeral`;
 
 -- Dumping structure for table projetogeral.criptografia
+DROP TABLE IF EXISTS `criptografia`;
 CREATE TABLE IF NOT EXISTS `criptografia` (
   `id_cartao` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `numero_cartao` varbinary(200) NOT NULL,
@@ -31,6 +32,7 @@ INSERT IGNORE INTO `criptografia` (`id_cartao`, `numero_cartao`) VALUES
 /*!40000 ALTER TABLE `criptografia` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.stock_apps
+DROP TABLE IF EXISTS `stock_apps`;
 CREATE TABLE IF NOT EXISTS `stock_apps` (
   `id_app` int(11) NOT NULL AUTO_INCREMENT,
   `app_name` varchar(50) NOT NULL,
@@ -48,6 +50,7 @@ INSERT IGNORE INTO `stock_apps` (`id_app`, `app_name`, `app_key`, `active`) VALU
 /*!40000 ALTER TABLE `stock_apps` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.stock_familias
+DROP TABLE IF EXISTS `stock_familias`;
 CREATE TABLE IF NOT EXISTS `stock_familias` (
   `id_familia` int(11) NOT NULL AUTO_INCREMENT,
   `id_parent` int(11) NOT NULL,
@@ -68,6 +71,7 @@ INSERT IGNORE INTO `stock_familias` (`id_familia`, `id_parent`, `designacao`, `i
 /*!40000 ALTER TABLE `stock_familias` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.stock_movimentos
+DROP TABLE IF EXISTS `stock_movimentos`;
 CREATE TABLE IF NOT EXISTS `stock_movimentos` (
   `id_movimento` int(11) NOT NULL AUTO_INCREMENT,
   `id_app` int(11) NOT NULL,
@@ -75,16 +79,19 @@ CREATE TABLE IF NOT EXISTS `stock_movimentos` (
   `quantidade` decimal(10,2) NOT NULL,
   `preco_total` decimal(10,2) NOT NULL,
   `entrada_saida` varchar(20) NOT NULL,
-  `data_movimento` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `data_movimento` datetime NOT NULL,
   `observacoes` text NOT NULL,
   PRIMARY KEY (`id_movimento`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table projetogeral.stock_movimentos: ~0 rows (approximately)
 /*!40000 ALTER TABLE `stock_movimentos` DISABLE KEYS */;
+INSERT IGNORE INTO `stock_movimentos` (`id_movimento`, `id_app`, `id_produto`, `quantidade`, `preco_total`, `entrada_saida`, `data_movimento`, `observacoes`) VALUES
+	(1, 1, 1, 1.00, 1647.95, 'saida', '2019-10-26 16:39:12', 'teste');
 /*!40000 ALTER TABLE `stock_movimentos` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.stock_produtos
+DROP TABLE IF EXISTS `stock_produtos`;
 CREATE TABLE IF NOT EXISTS `stock_produtos` (
   `id_produto` int(11) NOT NULL AUTO_INCREMENT,
   `id_familia` int(11) NOT NULL,
@@ -102,11 +109,12 @@ CREATE TABLE IF NOT EXISTS `stock_produtos` (
 -- Dumping data for table projetogeral.stock_produtos: ~2 rows (approximately)
 /*!40000 ALTER TABLE `stock_produtos` DISABLE KEYS */;
 INSERT IGNORE INTO `stock_produtos` (`id_produto`, `id_familia`, `designacao`, `descricao`, `imagem`, `preco`, `id_taxa`, `quantidade`, `detalhes`, `atualizacao`) VALUES
-	(1, 3, 'Computador Gamer', 'Computador com os melhores componentes...', '1565975608058.jpg', 1000.00, 2, 100, 'Nada nos detalhes.', '2019-08-16 18:13:28'),
+	(1, 3, 'Computador Gamer', 'Computador com os melhores componentes...', '1565975608058.jpg', 1433.00, 1, 100, 'Nada nos detalhes.', '2019-08-16 18:13:28'),
 	(2, 3, 'Computador de viagem', 'texto da descrição', '1567005693800.jpg', 2500.00, 2, 10, 'texto dos detalhes', '2019-08-28 16:21:33');
 /*!40000 ALTER TABLE `stock_produtos` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.stock_taxas
+DROP TABLE IF EXISTS `stock_taxas`;
 CREATE TABLE IF NOT EXISTS `stock_taxas` (
   `id_taxa` int(11) NOT NULL AUTO_INCREMENT,
   `designacao` varchar(50) NOT NULL,
@@ -122,6 +130,7 @@ INSERT IGNORE INTO `stock_taxas` (`id_taxa`, `designacao`, `percentagem`) VALUES
 /*!40000 ALTER TABLE `stock_taxas` ENABLE KEYS */;
 
 -- Dumping structure for table projetogeral.users
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id_user` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,

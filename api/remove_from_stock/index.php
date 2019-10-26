@@ -78,40 +78,69 @@
 
     // without taxes 
     $preco_total = $data['quantidade']*$produto['preco'];
+    $preco_total_sem_taxas = $preco_total;
+    $preco_total_com_taxas = $preco_total;
 
     if($produto['produto_id_taxa'] != 0){
         // with taxes
         $preco_total = $preco_total * (1 + ($produto['percentagem']/100));
-    }
-    
-    echo $preco_total;
-    die();
-    
+        $preco_total_com_taxas = $preco_total;
+    }      
 
-    // executar os cálculos para perceber o preço total
+    $params = array(
+        ':id_app' => $data['app_id'],
+        ':id_produto' => $data['id_produto'],
+        ':quantidade' => $data['quantidade'],
+        ':preco_total' => $preco_total,
+        ':entrada_saida' => 'saida',
+        ':observacoes' => $data['observacoes']
+    );
 
+    // inserir movimento no stock_movimentos
+    $gestor->EXE_NON_QUERY("
+        INSERT INTO stock_movimentos VALUES(
+            0,
+            :id_app,
+            :id_produto,
+            :quantidade,
+            :preco_total,
+            :entrada_saida,
+            NOW(),
+            :observacoes
+        )", $params);
+    
+    // update stock_produtos (atualizar o stock de produto vendido)
+    $params = array(
+        ':id_produto' => $data['id_produto'],
+        ':quantidade' => $data['quantidade']
+    );
+    $gestor->EXE_NON_QUERY("
+        UPDATE stock_produtos SET
+        quantidade = quantidade - :quantidade,
+        atualizacao = NOW()
+        WHERE id_produto = :id_produto
+    ",$params);
 
-    // insert stock_movimentos ...
-    // update stock_produtos set ...
-    
-    
+    // procurar a quantidade atual de stock do produto
+    $params = array(
+        ':id_produto' => $data['id_produto']
+    );
+    $dTemp = $gestor->EXE_QUERY(
+        "SELECT quantidade FROM ".
+        "stock_produtos ".
+        "WHERE id_produto = :id_produto", $params);
 
+    $response['RESULTS'] = array(
+        'id_produto' => $data['id_produto'],
+        'quantidade vendida' => $data['quantidade'],
+        'preço final (sem taxas)' => $preco_total_sem_taxas,
+        'preço final (com taxas)' => $preco_total_com_taxas,
+        'quantidade disponível' => $dTemp[0]['quantidade'],
+        'data da venda' => date('Y-m-d H:i:s')
+    );
     
-    
-    // // get product stock quantity by id
-    // $params = Array(
-    //     ':id_produto' => $data['id_produto']
-    // );
-    // $response['RESULTS'] = $gestor->EXE_QUERY(
-    //     "SELECT " .
-    //     "id_produto, designacao AS nome_produto, quantidade " .        
-    //     "FROM stock_produtos ".        
-    //     "WHERE id_produto = :id_produto"
-    // , $params);
-
-    // if(count($response['RESULTS']) == 0){
-    //     $response['MESSAGE'] = 'Inexistent product.';
-    // }
+    $response['STATUS'] = 'OK';
+    $response['MESSAGE'] = 'SUCCESS';
 
     // token
     $response['TOKEN'] = $token;
