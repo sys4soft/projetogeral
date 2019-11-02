@@ -14,17 +14,18 @@
 
     require_once 'api.php';
 
+    // inserir produtos no stock
     $post_vars = array(
-        'app_key' => 'DGXhTjiGPjsBb96SrYkA8NXWhzQisLVF',
-        'id_produto' => 10
+            'app_key' => 'DGXhTjiGPjsBb96SrYkA8NXWhzQisLVF',
+            'id_produto' => 1,
+            'quantidade' => 20
     );
-    $resultados = api('http://localhost/projetogeral/api/get_product/', $post_vars);
+    $resultados = api('http://localhost/projetogeral/api/add_to_stock/', $post_vars);
 
     echo '<pre>';
     print_r($resultados);
     echo '</pre>';
     ?>
-
 
 </body>
 </html>
