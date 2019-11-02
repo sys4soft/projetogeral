@@ -385,4 +385,20 @@ class StocksModel extends Model{
         // delete the selected product
         $this->query("DELETE FROM stock_produtos WHERE id_produto = ?", $params);        
     }
+
+
+
+
+    // ===========================================
+    // movimentos
+    // ===========================================
+    public function get_movimentos(){
+        return $this->query("
+            SELECT m.*, p.designacao
+            FROM stock_movimentos m, stock_produtos p
+            WHERE p.id_produto = m.id_produto
+            ORDER BY m.data_movimento DESC
+        "
+        )->getResult('array');
+    }
 }
